@@ -6,16 +6,15 @@ plt.style.use('seaborn')
 
 st.title('California Housing Data(1990) by Tianyu Liu')
 df = pd.read_csv('housing.csv')
-price_filter = st.slider('Median House Price', 0.0, 500001.0, 1000.0)  
+price_filter = st.slider('Median House Price', 0.0, 500001.0, 10000.0)  
 
 ocean_proximity_filter = st.sidebar.multiselect(
      'ocean_proximity Selector',
      df.ocean_proximity.unique(),  
      df.ocean_proximity.unique())  
 
-form = st.sidebar.form("country_form")
+form = st.sidebar
 country_filter = form.radio('choose input level', ('Low','Medium','High'))
-form.form_submit_button('submit')
 
 df = df[df.median_house_value <= price_filter]
 df = df[df.ocean_proximity.isin(ocean_proximity_filter)]
